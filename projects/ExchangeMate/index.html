@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+    <title>ExchangeMate</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="modal fade" id="countryInfoModal" tabindex="-1" role="dialog"
+            aria-labelledby="countryInfoModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="countryInfoModalLabel">Info</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="countryInfoBody">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="rankingModal" tabindex="-1" role="dialog" aria-labelledby="rankingModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="rankingModalLabel">Ranking</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="rankingBody" style="max-height: 60vh; overflow-y: auto;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Country</th>
+                                    <th scope="col">Score</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rankingTBody">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 sidebar p-3">
+                <h2>ExchangeMate</h2>
+                <hr>
+                <div class="container p-1">
+                    <h5><span class="material-icons-outlined">euro</span> Cost of Living <sup><a
+                                style="font-size: 16px; cursor: pointer;" tabindex="0" data-toggle="popover"
+                                data-trigger="focus" data-html="true" title="Cost of Living"
+                                data-content="Index of the average cost of living in relation to the US.<br>Used Dataset: <a target='_blank' class='text-primary' href='https://www.worlddata.info/cost-of-living.php'>worlddata</a>"
+                                class="material-icons-outlined">info</a></sup></h5>
+                    <h5 class="text-center"><span class="font-weight-bold text-primary" id="valueCOLSpan"></span></h5>
+                    <div>
+                        <div class="d-flex justify-content-center my-1">
+                            <span class="font-weight-bold indigo-text mr-2 mt-1">Low</span>
+                            <form class="range-field w-75 pt-1">
+                                <input id="sliderCOL" class="w-100" type="range" min="0" max="100" />
+                            </form>
+                            <span class="font-weight-bold indigo-text ml-2 mt-1">High</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="container p-1">
+                    <h5><span class="material-icons-outlined">school</span> Level of Education <sup><a
+                                style="font-size: 16px; cursor: pointer;" tabindex="0" data-toggle="popover"
+                                data-trigger="focus" data-html="true" title="Level of Education"
+                                data-content="Index of the 25-64 year-old population that has completed tertiary education.<br>Used Dataset: <a target='_blank' class='text-primary' href='https://data.oecd.org/eduatt/adult-education-level.htm#indicator-chart'>OECD</a>"
+                                class="material-icons-outlined">info</a></sup></h5>
+                    <h5 class="text-center"><span class="font-weight-bold text-primary" id="valueEDUSpan"></span></h5>
+                    <div>
+                        <div class="d-flex justify-content-center my-1">
+                            <span class="font-weight-bold indigo-text mr-2 mt-1">Low</span>
+                            <form class="range-field w-75 pt-1">
+                                <input id="sliderEDU" class="w-100" type="range" min="0" max="100" />
+                            </form>
+                            <span class="font-weight-bold indigo-text ml-2 mt-1">High</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="container p-1">
+                    <h5><span class="material-icons-outlined">sports_bar</span> Alcohol Consumption <sup><a
+                                style="font-size: 16px; cursor: pointer;" tabindex="0" data-toggle="popover"
+                                data-trigger="focus" data-html="true" title="Alcohol Consumption"
+                                data-content="Total litres of pure alcohol served.<br>Used Dataset: <a target='_blank' class='text-primary' href='https://www.kaggle.com/codebreaker619/alcohol-comsumption-around-the-world'>World Health Organisation, GISAH</a>"
+                                class="material-icons-outlined">info</a></sup></h5>
+                    <h5 class="text-center"><span class="font-weight-bold text-primary" id="valueALCSpan"></span></h5>
+                    <div>
+                        <div class="d-flex justify-content-center my-1">
+                            <span class="font-weight-bold indigo-text mr-2 mt-1">Low</span>
+                            <form class="range-field w-75 pt-1">
+                                <input id="sliderALC" class="w-100" type="range" min="0" max="100" />
+                            </form>
+                            <span class="font-weight-bold indigo-text ml-2 mt-1">High</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="container p-1">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="enableERA">
+                        <label class="form-check-label" for="enableERA">
+                            Enable Erasmus Filter
+                        </label>
+                    </div>
+                    <h5>
+                        <span class="material-icons-outlined">flight</span> Erasmus Popularity for Students from <sup><a
+                                style="font-size: 16px; cursor: pointer;" tabindex="0" data-toggle="popover"
+                                data-trigger="focus" data-html="true" title="Erasmus Popularity"
+                                data-content="Index based on the number of outgoing students from given homecountry.<br>Used Dataset: <a target='_blank' class='text-primary' href='https://op.europa.eu/en/publication-detail/-/publication/381dc9a5-3f4d-11eb-b27b-01aa75ed71a1/language-en'>European Union</a>"
+                                class="material-icons-outlined">info</a></sup>
+                        <div>
+                            <datalist id="suggestions"></datalist>
+                            <input onchange="this.style.width = this.value.length+3 + 'ch';"
+                                style="background:rgb(212, 233, 245); border: none; font-family: monospace"
+                                placeholder="Homecountry" autoComplete="on" list="suggestions" id="hcERA" disabled />
+                        </div>
+                    </h5>
+                    <h5 class="text-center"><span class="font-weight-bold text-primary" id="valueERASpan"></span></h5>
+                    <div>
+                        <div class="d-flex justify-content-center my-1">
+                            <span class="font-weight-bold indigo-text mr-2 mt-1">Low</span>
+                            <form class="range-field w-75 pt-1">
+                                <input disabled id="sliderERA" class="w-100" type="range" min="0" max="100" />
+                            </form>
+                            <span class="font-weight-bold indigo-text ml-2 mt-1">High</span>
+                        </div>
+                    </div>
+                </div>
+                <!--<hr>
+                <div class="container p-1">
+                    <button class="w-100 btn btn-primary" onclick="leggo()">Go</button>
+                </div>-->
+            </div>
+            <div class="col-9 text-center p-1 bg-white">
+                <!--<canvas id="canvas"></canvas>-->
+                <div id="regionButtons" class="text-left" style="display: none">
+                    <button id="changeRegionButton" class="btn btn-primary mx-2 mt-1" onclick="switchRegion()"><span
+                            style="font-size: 18px;" class="material-icons-outlined">star</span> Show Europe</button>
+                    <!--<button class="btn btn-primary mt-1" onclick="switchRegion(0)">Show World</button>-->
+                    <button class="btn btn-primary float-right mx-2 mt-1" onclick="showRanking()">Show Ranking</button>
+                </div>
+                <div id="placeholderMap" style="display: block">
+                    <h1 class="mt-5">No selections made yet</h1>
+                    <p>Please select your filter parameters on the left</p>
+                </div>
+                <div id="world_map" style="width: inherit; height: 90vh; display: none"></div>
+                <!--<button onclick="inputChanged()">hier</button>-->
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <!--SCRIPTS-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
