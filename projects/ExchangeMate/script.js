@@ -272,7 +272,7 @@ function drawRegionsMap(arr) {
             if (item.row != null) {
                 c = data.getFormattedValue(item.row, 0)
                 var code = countryISO[c]
-                modalT = "Overall score of <img src='https://flagcdn.com/32x24/" + code + ".png'> " + c + ": <b style='color: blue'>" + valueToString(data.getFormattedValue(item.row, 1)) + "</b> (" + data.getFormattedValue(item.row, 1) + "%)"
+                modalT = "Overall score of <img src='https://flagcdn.com/32x24/" + code.toLowerCase() + ".png'> " + c + ": <b style='color: blue'>" + valueToString(data.getFormattedValue(item.row, 1)) + "</b> (" + data.getFormattedValue(item.row, 1) + "%)"
                 p = document.createElement('p')
                 p.innerHTML = "Cost of Living: <b style='color: blue'>" + valueToString(json[hashMapCountries[c]]["col"]*100) + "</b> (" + (json[hashMapCountries[c]]["col"]*100).toFixed(2) + "%)<br>"
                 p.innerHTML += "Level of Education: <b style='color: blue'>" + valueToString(json[hashMapCountries[c]]["edu"]*100) + "</b> (" + (json[hashMapCountries[c]]["edu"]*100).toFixed(2) + "%)<br>"
@@ -315,7 +315,7 @@ function showRanking() {
         th.setAttribute('scope', 'row');
         th.appendChild(document.createTextNode(i+1))
         var code = countryISO[temp[i][0]]
-        td1.innerHTML = '<img src="https://flagcdn.com/32x24/' + code + '.png"> ' + temp[i][0]
+        td1.innerHTML = '<img src="https://flagcdn.com/32x24/' + code.toLowerCase() + '.png"> ' + temp[i][0]
         td2.appendChild(document.createTextNode((temp[i][1]).toFixed(3) + "%"))
         row.appendChild(th)
         row.appendChild(td1)
