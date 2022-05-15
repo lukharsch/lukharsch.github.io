@@ -237,6 +237,30 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <v-timeline dense>
+                        <v-timeline-item v-for="n in 4" :key="n" small>
+                            <template v-slot:icon>
+                                <v-avatar>
+                                    <img src="https://i.pravatar.cc/64" />
+                                </v-avatar>
+                            </template>
+                            <v-card class="elevation-2">
+                                <v-card-title class="text-h5">
+                                    Lorem ipsum
+                                </v-card-title>
+                                <v-card-text
+                                    >Lorem ipsum dolor sit amet, no nam oblique
+                                    veritus. Commune scaevola imperdiet nec ut,
+                                    sed euismod convenire principes at. Est et
+                                    nobis iisque percipit, an vim zril
+                                    disputando voluptatibus, vix an salutandi
+                                    sententiae.</v-card-text
+                                >
+                            </v-card>
+                        </v-timeline-item>
+                    </v-timeline>
+                </div>
                 <div style="height: 100vh"></div>
             </div>
             <!-- <div style="flex: 1 1 auto" :class="ageClasses">
