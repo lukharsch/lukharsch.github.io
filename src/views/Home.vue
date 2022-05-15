@@ -115,7 +115,7 @@
                         </v-avatar>
                     </div>
                 </div>
-                <div>
+                <div style="width: 100%">
                     <div
                         style="
                             display: flex;
@@ -238,7 +238,7 @@
                     </div>
                 </div>
                 <div>
-                    <v-timeline dense>
+                    <!-- <v-timeline dense>
                         <v-timeline-item v-for="n in 4" :key="n" small>
                             <template v-slot:icon>
                                 <v-avatar>
@@ -259,7 +259,7 @@
                                 >
                             </v-card>
                         </v-timeline-item>
-                    </v-timeline>
+                    </v-timeline> -->
                 </div>
                 <div style="height: 100vh"></div>
             </div>
