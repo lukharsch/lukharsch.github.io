@@ -115,7 +115,7 @@
                         </v-avatar>
                     </div>
                 </div>
-                <div style="width: 100%">
+                <div>
                     <div
                         style="
                             display: flex;
@@ -238,17 +238,35 @@
                     </div>
                 </div>
                 <div>
-                    <!-- <v-timeline dense>
-                        <v-timeline-item v-for="n in 4" :key="n" small>
+                    <v-timeline
+                        :class="studyClasses"
+                        :dense="!smAndUp"
+                    >
+                        <v-timeline-item
+                            v-for="study in studys"
+                            :key="study.year"
+                        >
                             <template v-slot:icon>
                                 <v-avatar>
-                                    <img src="https://i.pravatar.cc/64" />
+                                    <v-icon
+                                        style="color: var(--v-background-base)"
+                                        >mdi-school</v-icon
+                                    >
                                 </v-avatar>
                             </template>
-                            <v-card class="elevation-2">
+                            <template v-slot:opposite>
+                                <span>{{ study.year }}</span>
+                            </template>
+                            <v-card outlined>
+                                <v-card-subtitle class="text-overline pb-0" v-if="!smAndUp">
+                                    {{ study.year }}
+                                </v-card-subtitle>
                                 <v-card-title class="text-h5">
-                                    Lorem ipsum
+                                    {{ study.location }}
                                 </v-card-title>
+                                <v-card-subtitle class="text-subtitle-1">
+                                    {{ study.title }}
+                                </v-card-subtitle>
                                 <v-card-text
                                     >Lorem ipsum dolor sit amet, no nam oblique
                                     veritus. Commune scaevola imperdiet nec ut,
@@ -259,37 +277,12 @@
                                 >
                             </v-card>
                         </v-timeline-item>
-                    </v-timeline> -->
+                    </v-timeline>
                 </div>
-                <div style="height: 100vh"></div>
+                <div style="height: 200vh">
+
+                </div>
             </div>
-            <!-- <div style="flex: 1 1 auto" :class="ageClasses">
-                <v-timeline>
-                    <v-timeline-item v-for="n in 4" :key="n" large>
-                        <template v-slot:icon>
-                            <v-avatar>
-                                <img src="https://i.pravatar.cc/64" />
-                            </v-avatar>
-                        </template>
-                        <template v-slot:opposite>
-                            <span>Tus eu perfecto</span>
-                        </template>
-                        <v-card class="elevation-2">
-                            <v-card-title class="text-h5">
-                                Lorem ipsum
-                            </v-card-title>
-                            <v-card-text
-                                >Lorem ipsum dolor sit amet, no nam oblique
-                                veritus. Commune scaevola imperdiet nec ut, sed
-                                euismod convenire principes at. Est et nobis
-                                iisque percipit, an vim zril disputando
-                                voluptatibus, vix an salutandi
-                                sententiae.</v-card-text
-                            >
-                        </v-card>
-                    </v-timeline-item>
-                </v-timeline>
-            </div> -->
         </div>
     </div>
 </template>
@@ -308,6 +301,7 @@ export default {
         buzz: "Lukas",
         avatarClasses: ["fade", "fade-out"],
         ageClasses: ["fade", "fade-out"],
+        studyClasses: ["fade", "fade-out"],
         startingPoint: 700,
         sectionSizeMult: 3,
         isName: false,
@@ -326,6 +320,26 @@ export default {
         )
             .toString()
             .replace(/\B(?=(\d{3})+(?!\d))/g, "."),
+        studys: [
+            {
+                year: "2017 - 2021",
+                title: "Computer Science, B.Sc.",
+                location: "Ulm University",
+                text: "Lorem Ipsum sit dolor",
+            },
+            {
+                year: "2021 - present",
+                title: "Computer Science, M.Sc.",
+                location: "Ulm University",
+                text: "Lorem Ipsum sit dolor",
+            },
+            {
+                year: "2021",
+                title: "Computer Science, M.Sc.",
+                location: "University of Helsinki",
+                text: "Lorem Ipsum sit dolor",
+            },
+        ],
     }),
 
     computed: {
@@ -340,6 +354,9 @@ export default {
         tmSize() {
             return this.$vuetify.breakpoint.smAndUp ? "34px" : "24px";
         },
+        smAndUp() {
+            return this.$vuetify.breakpoint.smAndUp
+        }
     },
 
     methods: {
@@ -351,14 +368,16 @@ export default {
             } else if (window.scrollY > this.startingPoint * 3) {
                 this.startingWord = "I'm";
                 this.buzz = "a web developer";
-            } else if (window.scrollY > this.startingPoint * 2) {
+            } else if (window.scrollY > 1040) {
                 this.startingWord = "I'm";
                 this.buzz = "a computer science student";
-                this.ageClasses = ["fade", "fade-out-no-translate"];
+                //this.ageClasses = ["fade", "fade-out-no-translate"];
+                this.studyClasses = ["fade", "fade-in"];
             } else if (window.scrollY > 680) {
                 this.startingWord = "I'm";
                 this.buzz = "23 years old";
-                this.avatarClasses = ["fade", "fade-out-no-translate"];
+                //this.avatarClasses = ["fade", "fade-out-no-translate"];
+                this.studyClasses = ["fade", "fade-out"];
                 this.ageClasses = ["fade", "fade-in"];
             } else {
                 this.startingWord = "I'm";

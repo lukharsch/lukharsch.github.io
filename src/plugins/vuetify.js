@@ -10,11 +10,11 @@ export default new Vuetify({
             light: {
                 primary: "#996E00",
                 error: "#B00020",
-                background: "#ffffff"
+                background: "#ffffff",
             },
             dark: {
                 primary: "#ffd56b",
-                background: "#121212"
+                background: "#121212",
             },
         },
         options: { customProperties: true },
