@@ -238,10 +238,7 @@
                     </div>
                 </div>
                 <div>
-                    <v-timeline
-                        :class="studyClasses"
-                        :dense="!smAndUp"
-                    >
+                    <v-timeline :class="studyClasses" :dense="!smAndUp">
                         <v-timeline-item
                             v-for="study in studys"
                             :key="study.year"
@@ -258,30 +255,63 @@
                                 <span>{{ study.year }}</span>
                             </template>
                             <v-card outlined>
-                                <v-card-subtitle class="text-overline pb-0" v-if="!smAndUp">
+                                <v-card-subtitle
+                                    class="text-overline pb-0"
+                                    v-if="!smAndUp"
+                                >
                                     {{ study.year }}
                                 </v-card-subtitle>
-                                <v-card-title class="text-h5">
-                                    {{ study.location }}
-                                </v-card-title>
-                                <v-card-subtitle class="text-subtitle-1">
-                                    {{ study.title }}
-                                </v-card-subtitle>
-                                <v-card-text
-                                    >Lorem ipsum dolor sit amet, no nam oblique
-                                    veritus. Commune scaevola imperdiet nec ut,
-                                    sed euismod convenire principes at. Est et
-                                    nobis iisque percipit, an vim zril
-                                    disputando voluptatibus, vix an salutandi
-                                    sententiae.</v-card-text
-                                >
+                                <v-row no-gutters align-items="center">
+                                    <v-col
+                                        cols="2"
+                                        class="pl-4 pt-4 pb-4"
+                                        style="align-self: center"
+                                    >
+                                        <logo-uni-ulm
+                                            v-if="
+                                                study.location.includes('Ulm')
+                                            "
+                                        />
+                                        <logo-uni-helsinki
+                                            v-else-if="
+                                                study.location.includes(
+                                                    'Helsinki'
+                                                )
+                                            "
+                                        />
+                                    </v-col>
+                                    <v-col cols="10">
+                                        <v-card-title class="text-h5" style="word-break: break-word">
+                                            {{ study.location }}
+                                        </v-card-title>
+                                        <v-card-subtitle
+                                            class="text-subtitle-1"
+                                        >
+                                            {{ study.title }}
+                                        </v-card-subtitle>
+                                    </v-col>
+                                </v-row>
+
+                                <v-card-text v-html="study.text"></v-card-text>
                             </v-card>
                         </v-timeline-item>
                     </v-timeline>
                 </div>
-                <div style="height: 200vh">
-
+                <div style="margin-top: 100px; margin-bottom: 100px">
+                    <v-row justify-content="space-between" align-items="center" :class="workClasses">
+                        <v-col cols="12" sm="4" lg="4">
+                            <work-tile uniUlm />
+                        </v-col>
+                        <v-col cols="12" sm="4" lg="4">
+                            <work-tile uniHelsinki />
+                        </v-col>
+                        <v-col cols="12" sm="4" lg="4">
+                            <work-tile uniUlm />
+                        </v-col>
+                    </v-row>
                 </div>
+
+                <div style="height: 200vh"></div>
             </div>
         </div>
     </div>
@@ -289,12 +319,16 @@
 
 <script>
 // @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
+import WorkTile from "@/components/WorkTile.vue";
+import LogoUniUlm from "@/components/LogoUniUlm.vue";
+import LogoUniHelsinki from "@/components/LogoUniHelsinki.vue";
 
 export default {
     name: "Home",
     components: {
-        //HelloWorld
+        WorkTile,
+        LogoUniUlm,
+        LogoUniHelsinki,
     },
     data: () => ({
         startingWord: "I'm",
@@ -302,6 +336,7 @@ export default {
         avatarClasses: ["fade", "fade-out"],
         ageClasses: ["fade", "fade-out"],
         studyClasses: ["fade", "fade-out"],
+        workClasses: ["fade", "fade-out"],
         startingPoint: 700,
         sectionSizeMult: 3,
         isName: false,
@@ -323,21 +358,21 @@ export default {
         studys: [
             {
                 year: "2017 - 2021",
-                title: "Computer Science, B.Sc.",
+                title: "Bachelor of Science",
                 location: "Ulm University",
-                text: "Lorem Ipsum sit dolor",
+                text: "<ul><li>Computer Science in the Bachelor's programme</li><li>Application Subject: Economics</li><li>Thesis: Conception and Implementation of a new web-based system to plan exams.</li><li>Thesis grade: 1.0</li><li>Bachelor's grade: 2.1</li></ul>",
             },
             {
                 year: "2021 - present",
-                title: "Computer Science, M.Sc.",
+                title: "Master of Science",
                 location: "Ulm University",
-                text: "Lorem Ipsum sit dolor",
+                text: "<ul><li>Computer Science in the Master's programme</li><li>Application Subject: Economics</li></ul>",
             },
             {
                 year: "2021",
-                title: "Computer Science, M.Sc.",
+                title: "Exchange Semester",
                 location: "University of Helsinki",
-                text: "Lorem Ipsum sit dolor",
+                text: "<ul><li>Exchange Semester in the Computer Science Master's programme at the University of Helsinki</li></ul>",
             },
         ],
     }),
@@ -355,23 +390,25 @@ export default {
             return this.$vuetify.breakpoint.smAndUp ? "34px" : "24px";
         },
         smAndUp() {
-            return this.$vuetify.breakpoint.smAndUp
-        }
+            return this.$vuetify.breakpoint.smAndUp;
+        },
     },
 
     methods: {
         updateScroll() {
             console.log(window.scrollY);
-            if (window.scrollY > this.startingPoint * 4) {
+            if (window.scrollY > 3330) {
                 this.startingWord = "You can";
                 this.buzz = "contact me";
             } else if (window.scrollY > this.startingPoint * 3) {
                 this.startingWord = "I'm";
                 this.buzz = "a web developer";
+                this.workClasses = ["fade", "fade-in"];
             } else if (window.scrollY > 1040) {
                 this.startingWord = "I'm";
                 this.buzz = "a computer science student";
                 //this.ageClasses = ["fade", "fade-out-no-translate"];
+                this.workClasses = ["fade", "fade-out"];
                 this.studyClasses = ["fade", "fade-in"];
             } else if (window.scrollY > 680) {
                 this.startingWord = "I'm";
