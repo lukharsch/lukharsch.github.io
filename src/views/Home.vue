@@ -303,10 +303,10 @@
                             <work-tile uniUlm />
                         </v-col>
                         <v-col cols="12" sm="4" lg="4">
-                            <work-tile uniHelsinki />
+                            <work-tile db />
                         </v-col>
                         <v-col cols="12" sm="4" lg="4">
-                            <work-tile uniUlm />
+                            <work-tile mb />
                         </v-col>
                     </v-row>
                 </div>

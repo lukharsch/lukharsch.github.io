@@ -10,7 +10,8 @@
         <v-card class="wrapper" outlined>
             <div class="mt-4 text-center">
                 <logo-uni-ulm v-if="uniUlm" style="width: 50%; aspect-ratio: 1 / 1;"/>
-                <logo-uni-helsinki v-else-if="uniHelsinki" style="width: 50%; aspect-ratio: 1 / 1;" />
+                <LogoDB v-else-if="db" style="width: 50%; aspect-ratio: 1 / 1;" />
+                <LogoMB v-else-if="mb" style="width: 50%; aspect-ratio: 1 / 1;" />
             </div>
 
             <v-card-title class="text-h4 mb-2"> Ulm University </v-card-title>
@@ -46,18 +47,24 @@
 <script>
 import LogoUniUlm from "@/components/LogoUniUlm.vue"
 import LogoUniHelsinki from "@/components/LogoUniHelsinki.vue"
+import LogoDB from "@/components/LogoDB.vue"
+import LogoMB from "@/components/LogoMB.vue"
 
 export default {
     name: "WorkTile",
 
     components: {
         LogoUniUlm,
-        LogoUniHelsinki
+        LogoUniHelsinki,
+        LogoDB,
+        LogoMB
     },
 
     props: {
         uniUlm: Boolean,
         uniHelsinki: Boolean,
+        db: Boolean,
+        mb: Boolean,
     },
 
     data: () => ({
