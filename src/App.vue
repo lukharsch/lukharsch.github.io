@@ -45,50 +45,220 @@
           </a>
         </div>
         <v-icon class="text-h4 text-center content primary-text">mdi-school</v-icon>
-        <h4 class="text-h4 text-center content">Education</h4>
-        <span class="text-body-1 text-center content pa-4">Click to explore</span>
-        <div class="d-flex justify-center flex-column content" style="max-width: 95%">
-          <v-tabs
-              background-color="#121212"
-              v-model="selectedEducation"
-              active-class="temp"
-              color="#FFD56B"
+        <h4 class="text-h4 text-center content pb-4">Education</h4>
+        <div class="d-flex justify-center flex-column content hidden-md-and-up" style="max-width: 95%">
+          <v-btn class="my-2" outlined color="#FFD56B" @click="sheet = !sheet">
+            B.Sc. Computer Science <br> Ulm, Germany
+          </v-btn>
+          <v-btn class="my-2" outlined color="#FFD56B" @click="sheet = !sheet">
+            M.Sc. Computer Science <br> Helsinki, Finland
+          </v-btn>
+          <v-btn class="my-2" outlined color="#FFD56B" @click="sheet = !sheet">
+            M.Sc. Computer Science <br> Ulm, Germany
+          </v-btn>
+        </div>
+        <v-bottom-sheet v-model="sheet">
+          <v-sheet
+              class="pa-2"
+              height="600px"
+              color="#121212"
           >
-            <v-tabs-slider color="#FFD56B"></v-tabs-slider>
+            <div class="text-right" style="background-color: #121212">
+              <v-btn
+                  class="mt-6"
+                  icon
+                  color="#FFD56B"
+                  @click="sheet = !sheet"
+              >
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </div>
 
-            <v-tab
-
+            <v-card flat style="background-color: #121212">
+              <v-card-title>Bachelor of Science, <br> Computer Science</v-card-title>
+              <v-card-subtitle>Ulm University, Germany</v-card-subtitle>
+              <v-card-text>
+                <v-row>
+                  <v-col cols="4">
+                    Time:
+                  </v-col>
+                  <v-col cols="8">
+                    2017 - 2021
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="4">
+                    Applied subject:
+                  </v-col>
+                  <v-col cols="8">
+                    Economics
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="4">
+                    Thesis:
+                  </v-col>
+                  <v-col cols="8">
+                    Bachelor's thesis about requirements engineering, design and development of a web system in an agile way for planning exams for students of the computer science programme at Ulm University. <br>
+                    Grade: 1.0
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="4">
+                    Bachelor's grade:
+                  </v-col>
+                  <v-col cols="8">
+                    2.1
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
+          </v-sheet>
+        </v-bottom-sheet>
+        <div class="d-flex justify-center flex-column content" style="max-width: 95%">
+            <v-tabs
+                background-color="#121212"
+                v-model="selectedEducation"
+                active-class="temp"
+                color="#FFD56B"
+                centered
+                class="hidden-sm-and-down"
             >
-              B.Sc. Computer Science <br> Ulm, Germany
-            </v-tab>
-            <v-tab
+              <v-tabs-slider color="#FFD56B"></v-tabs-slider>
 
-            >
-              M.Sc. Computer Science <br> Helsinki, Finland
-            </v-tab>
-            <v-tab
-
-            >
-              M.Sc. Computer Science <br> Ulm, Germany
-            </v-tab>
-          </v-tabs>
-          <v-tabs-items v-model="selectedEducation" style="background-color: #121212">
-            <v-tab-item>
-              <v-card flat style="background-color: #121212">
-                <v-card-text>Hi</v-card-text>
-              </v-card>
-            </v-tab-item>
-            <v-tab-item>
-              <v-card flat style="background-color: #121212">
-                <v-card-text>Hi</v-card-text>
-              </v-card>
-            </v-tab-item>
-            <v-tab-item>
-              <v-card flat style="background-color: #121212">
-                <v-card-text>Hi</v-card-text>
-              </v-card>
-            </v-tab-item>
-          </v-tabs-items>
+              <v-tab>
+                B.Sc. Computer Science <br> Ulm, Germany
+              </v-tab>
+              <v-tab>
+                M.Sc. Computer Science <br> Helsinki, Finland
+              </v-tab>
+              <v-tab>
+                M.Sc. Computer Science <br> Ulm, Germany
+              </v-tab>
+            </v-tabs>
+            <v-tabs-items class="hidden-sm-and-down" v-model="selectedEducation" style="background-color: #121212; max-width: 700px">
+              <v-tab-item>
+                <v-card flat style="background-color: #121212">
+                  <v-card-title>Bachelor of Science, Computer Science</v-card-title>
+                  <v-card-subtitle>Ulm University, Germany</v-card-subtitle>
+                  <v-card-text>
+                    <v-row>
+                      <v-col cols="4">
+                        Time:
+                      </v-col>
+                      <v-col cols="8">
+                        2017 - 2021
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="4">
+                        Applied subject:
+                      </v-col>
+                      <v-col cols="8">
+                        Economics
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="4">
+                        Thesis:
+                      </v-col>
+                      <v-col cols="8">
+                        Bachelor's thesis about requirements engineering, design and development of a web system in an agile way for planning exams for students of the computer science programme at Ulm University. <br>
+                        Grade: 1.0
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="4">
+                        Bachelor's grade:
+                      </v-col>
+                      <v-col cols="8">
+                        2.1
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item>
+                <v-card flat style="background-color: #121212">
+                  <v-card-title>Master of Science, Computer Science</v-card-title>
+                  <v-card-subtitle>Helsinki, Finland (exchange semester)</v-card-subtitle>
+                  <v-card-text>
+                    <v-row>
+                      <v-col cols="4">
+                        Time:
+                      </v-col>
+                      <v-col cols="8">
+                        08/2021 - 12/2021
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="4">
+                        Courses:
+                      </v-col>
+                      <v-col cols="8">
+                        Various courses in data science, product management, software architecture, sustainable software engineering and big data.
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="4">
+                        Weighted final grade:
+                      </v-col>
+                      <v-col cols="8">
+                        1.1
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item>
+                <v-card flat style="background-color: #121212">
+                  <v-card-title>Master of Science, Computer Science</v-card-title>
+                  <v-card-subtitle>Ulm University, Germany</v-card-subtitle>
+                  <v-card-text>
+                    <v-row>
+                      <v-col cols="4">
+                        Time:
+                      </v-col>
+                      <v-col cols="8">
+                        2021-2023
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="4">
+                        Applied subject:
+                      </v-col>
+                      <v-col cols="8">
+                        Economics
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="4">
+                        Specialization:
+                      </v-col>
+                      <v-col cols="8">
+                        Privacy, IT security and media laws.
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="4">
+                        Thesis:
+                      </v-col>
+                      <v-col cols="8">
+                        ...
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="4">
+                        Final grade:
+                      </v-col>
+                      <v-col cols="8">
+                        ...
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+            </v-tabs-items>
         </div>
 
         <div class="bottom-nav d-flex justify-center align-center">
@@ -120,7 +290,8 @@ export default {
 
   data: () => ({
     scrollAmount: 1,
-    selectedEducation: 0
+    selectedEducation: 0,
+    sheet: false
   }),
 
   methods: {
